@@ -1,10 +1,16 @@
-const express = require('express')
+const express = require('express');
+const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 const randomWords = require('random-words');
 const bodyParser = require('body-parser');
 
 const app = express()
 app.use(bodyParser.json())
+
+const corsOptions = {
+  origin: 'http://localhost:5000',
+  optionsSuccessStatus: 204,
+};
 
 const port = 8080
 
@@ -15,7 +21,7 @@ const checkPosition = (word) => ((l, i) => ({
   ...l,
 }));
 
-app.get('/word', (_, res) => {
+app.get('/word', cors(corsOptions), (_, res) => {
   const word = {
     id: uuidv4(),
     value: randomWords()
@@ -35,7 +41,8 @@ app.get('/word', (_, res) => {
   });
 })
 
-app.post('/word/:id', (req, res) => {
+app.options('/word/:id', cors(corsOptions))
+app.post('/word/:id', cors(corsOptions), (req, res) => {
   const word = words.find(w => w.id === req.params.id);
   res.status(200).json({
     id: word.id,
@@ -44,5 +51,5 @@ app.post('/word/:id', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`Scramble app listening at http://localhost:${port}`)
 })
