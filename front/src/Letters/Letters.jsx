@@ -8,7 +8,9 @@ const Letters = ({ word, checkWord }) => {
 
   useEffect(() => {
     if (!drake && ref.current) {
-      const d = dragula([ref.current]);
+      const d = dragula([ref.current], {
+        direction: 'horizontal',
+      });
       d.on('dragend', () => {
         const wordId = Array.from(document.getElementsByClassName('container'))[0].id;
         const ids = Array.from(document.getElementsByClassName('letter')).map(e => ({
