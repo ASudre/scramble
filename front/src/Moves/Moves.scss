@@ -1,0 +1,15 @@
+#moves {
+  text-align: end;
+  font-size: xxx-large;
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+
+  span {
+    background-color: #3747cc;
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
+    padding: 0 10px;
+    margin: 10px 0;
+  }
+}

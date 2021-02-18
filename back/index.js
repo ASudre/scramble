@@ -16,7 +16,7 @@ const port = 8080
 
 const words = [];
 
-const checkPosition = (word) => ((l, i) => ({
+const checkPositions = (word) => ((l, i) => ({
   rightPosition: word[i].letter === l.letter,
   ...l,
 }));
@@ -36,16 +36,17 @@ app.get('/word', cors(corsOptions), (_, res) => {
     id: word.id,
     value: [...word.value]
       .sort(() => (0.5 - Math.random()))
-      .map(checkPosition(word.value)),
+      .map(checkPositions(word.value)),
   });
 })
 
 app.options('/word/:id', cors(corsOptions))
 app.post('/word/:id', cors(corsOptions), (req, res) => {
   const word = words.find(w => w.id === req.params.id);
+  const toCheckWord = req.body;
   res.status(200).json({
     id: word.id,
-    value: req.body.word.map(checkPosition(word.value)),
+    value: toCheckWord.value.map(checkPositions(word.value)),
   });
 });
 
