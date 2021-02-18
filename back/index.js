@@ -26,10 +26,9 @@ app.get('/word', cors(corsOptions), (_, res) => {
     id: uuidv4(),
     value: randomWords()
       .split('')
-      .map((letter, index) => ({
+      .map((letter) => ({
         id: uuidv4(),
         letter,
-        index,
       })),
   };
   words.push(word);
