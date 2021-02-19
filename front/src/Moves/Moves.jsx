@@ -2,10 +2,10 @@ import React from 'react';
 
 import './Moves.scss';
 
-const Moves = ({ value }) => (
+const Moves = ({ value, loading }) => (
   <div id="moves">
     <span>
-      {value}
+      {loading ? '/' : value}
     </span>
   </div>
 );
