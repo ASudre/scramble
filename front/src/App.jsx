@@ -25,6 +25,7 @@ const App = () => {
   const [finished, setFinished] = useState(false);
   const [moves, setMoves] = useState(0);
   const init = () => {
+    setWord({});
     setMoves(0);
     getWord().then(setWord);
   }
