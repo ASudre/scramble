@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import './App.scss';
 import Letters from './Letters/Letters';
 import Moves from './Moves/Moves';
+import config from './config';
 
-const API_URL = process.env.NODE_ENV === 'development' ? '' : 'http://localhost:8080';
-
-const getWord = async () => fetch(`${API_URL}/word`)
+const getWord = async () => fetch(`${config.API_URL}/word`)
   .then(res => res.json());
 
 const checkWord = async ({ id, value }) => id
-  ? fetch(`${API_URL}/word/${id}`, {
+  ? fetch(`${config.API_URL}/word/${id}`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

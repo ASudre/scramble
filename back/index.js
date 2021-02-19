@@ -8,7 +8,10 @@ const app = express()
 app.use(bodyParser.json())
 
 const corsOptions = {
-  origin: 'http://localhost:5000',
+  origin: [
+    'http://chrome-devtools-prez.s3-website.eu-west-3.amazonaws.com',
+    'http://localhost:5000',
+  ],
   optionsSuccessStatus: 204,
 };
 
@@ -40,7 +43,7 @@ app.get('/word', cors(corsOptions), (_, res) => {
   });
 })
 
-app.options('/word/:id', cors(corsOptions))
+app.options('/word/:id', cors(corsOptions));
 app.post('/word/:id', cors(corsOptions), (req, res) => {
   const word = words.find(w => w.id === req.params.id);
   const toCheckWord = req.body;
